@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+  <flow name="payment-approval-by-pnr" doc:id="167f5155-a837-4c58-86a0-9dd0edaf3241" >
+    <ee:transform>
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  lastName: "Smith",
+  flightDate: "2019-02-14",
+  depart: "14:30:00",
+  boarding: "13:15:00",
+  gate: "4A",
+  flight: "ANY6584",
+  airportDepart: "ATL",
+  airportArrive: "SFO",
+  class: "Economy",
+  seat: "16C",
+  bagsCount: 2,
+  PNR: "928382J"
+}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+  </flow>
+  <flow name="check-in-by-pnr" doc:id="7c3e61ec-d3bd-4dab-8b09-c570e465bd42">
+    <ee:transform>
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  paymentID: "PAY-1AKD7482FAB9STATKO"
+}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+  </flow>
+</mule>
